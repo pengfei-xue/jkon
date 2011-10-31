@@ -5,7 +5,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["action.js"]
+      "js": ["jquery-1.6.3.min.js", "action.js"]
     }
   ],
   "permissions" : ["<all_urls>"]
