@@ -62,7 +62,7 @@ function setFocusEvent(elements)
 {
     // if focus on input, we should bail on JK key shortcut
     var htmlTagArray = elements;
-    for (var i=0; i < htmlTagArray.length-1; i++){
+    for (var i=0; i < htmlTagArray.length; i++){
         htmlTagArray[i].onfocus = function() { JKOn = 0;};
         htmlTagArray[i].onblur = function() { JKOn = 1;};
     }
