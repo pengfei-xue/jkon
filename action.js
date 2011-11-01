@@ -58,15 +58,27 @@ function detectspecialkeys(e){
     }
 }
 
-function addFocusHandler()
+function setFocusEvent(elements)
 {
-    var input_array = document.getElementsByTagName('input');
     // if focus on input, we should bail on JK key shortcut
-    for (var i=0; i < input_array.length-1; i++){
-        input_array[i].onfocus = function() { JKOn = 0;};
-        input_array[i].onblur = function() { JKOn = 1;};
+    var htmlTagArray = elements;
+    for (var i=0; i < htmlTagArray.length-1; i++){
+        htmlTagArray[i].onfocus = function() { JKOn = 0;};
+        htmlTagArray[i].onblur = function() { JKOn = 1;};
     }
 }
 
-window.onload = addFocusHandler();
-document.onkeypress = detectspecialkeys;
+function addFocusHandler()
+{
+    var htmlTags = ["input", "textarea"];
+    for (var i=0; i<htmlTags.length; i++) {
+        var htmlTag = htmlTags[i];
+        var htmlTagArray = document.getElementsByTagName(htmlTag);
+        setFocusEvent(htmlTagArray);
+    }
+}
+
+$(document).ready(function (){
+    addFocusHandler();
+    document.onkeypress = detectspecialkeys;
+});
