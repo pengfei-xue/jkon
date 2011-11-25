@@ -22,6 +22,11 @@ function getCurrentPosition()
     return window.pageYOffset;
 }
 
+function getScrollDistance
+{
+    return 200;
+}
+
 // the height of the document
 function getClientPageHeight()
 {
@@ -34,7 +39,7 @@ function getClientPageHeight()
 function pageDown()
 {
     var current_position = getCurrentPosition();
-    window.scroll(0,300 + current_position);
+    window.scroll(0, getScrollDistance() + current_position);
 }
 
 /*
@@ -43,7 +48,7 @@ function pageDown()
 function pageUp()
 {
     var current_position = getCurrentPosition();
-    window.scroll(0, current_position - 300);
+    window.scroll(0, current_position - getScrollDistance());
 }
 
 function detectspecialkeys(e){
