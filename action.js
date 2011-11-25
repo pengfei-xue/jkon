@@ -22,7 +22,7 @@ function getCurrentPosition()
     return window.pageYOffset;
 }
 
-function getScrollDistance
+function getScrollDistance()
 {
     return 200;
 }
