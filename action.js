@@ -63,13 +63,30 @@ function detectspecialkeys(e){
     }
 }
 
-function setFocusEvent(elements)
+function attachEvent(node, action, handler)
 {
-    // if focus on input, we should bail on JK key shortcut
+    var node = typeof node == 'string' ? document.getElementById(node) : node;
+
+    node.addEventListener(action, handler, false);
+}
+
+function focusActionHandler()
+{
+    JKOn = 0;
+}
+
+function blurActionHandler()
+{
+    JKOn = 1;
+}
+
+function setEvent(elements)
+{
+    // if focusing on input, we should bail on JK key shortcut
     var htmlTagArray = elements;
     for (var i=0; i < htmlTagArray.length; i++){
-        htmlTagArray[i].onfocus = function() { JKOn = 0;};
-        htmlTagArray[i].onblur = function() { JKOn = 1;};
+        attachEvent(htmlTagArray[i], 'focus', focusActionHandler);
+        attachEvent(htmlTagArray[i], 'blur', blurActionHandler);
     }
 }
 
@@ -79,7 +96,7 @@ function addFocusHandler()
     for (var i=0; i<htmlTags.length; i++) {
         var htmlTag = htmlTags[i];
         var htmlTagArray = document.getElementsByTagName(htmlTag);
-        setFocusEvent(htmlTagArray);
+        setEvent(htmlTagArray);
     }
 }
 
