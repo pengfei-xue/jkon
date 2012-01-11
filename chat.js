@@ -18,7 +18,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 */
 
 var windowFocus = true;
-var username;
 var originalTitle;
 var blinkOrder = 0;
 
@@ -72,8 +71,13 @@ function createChatBox(chatboxtitle) {
 
 	$(" <div />" ).attr("id","chatbox_"+chatboxtitle)
 	.addClass("chatbox")
-	.html('<div class="chatboxhead"><div class="chatboxtitle">'+chatboxtitle+'</div><div class="chatboxoptions"><a href="javascript:void(0)" onclick="javascript:toggleChatBoxGrowth(\''+chatboxtitle+'\')">-</a> <a href="javascript:void(0)" onclick="javascript:closeChatBox(\''+chatboxtitle+'\')">X</a></div><br clear="all"/></div><div class="chatboxcontent"></div><div class="chatboxinput"><textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>')
-	.appendTo($( "body" ));
+	.html('<div class="chatboxhead">' + 
+        '<div class="chatboxtitle" href="javascript:void(0)" onclick="javascript:toggleChatBoxGrowth(\''+ 
+        chatboxtitle + '\')">' + chatboxtitle +
+        '</div><div class="chatboxoptions"><a href="javascript:void(0)" onclick="javascript:closeChatBox(\''+
+        chatboxtitle + '\')">X</a></div><br clear="all"/>' + 
+        '</div><div class="chatboxcontent"></div><div class="chatboxinput"><textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>')
+	    .appendTo($( "body" ));
 
 	$("#chatbox_"+chatboxtitle).css('bottom', '0px');
 	
@@ -131,36 +135,30 @@ function toggleChatBoxGrowth(chatboxtitle) {
 }
 
 function checkChatBoxInputKey(event,chatboxtextarea,chatboxtitle) {
-	 
-	if(event.keyCode == 13 && event.shiftKey == 0)  {
+    if(event.keyCode == 13 && event.shiftKey == 0)  {
 		message = $(chatboxtextarea).val();
 		message = message.replace(/^\s+|\s+$/g,"");
 
 		$(chatboxtextarea).val('');
 		$(chatboxtextarea).focus();
 		$(chatboxtextarea).css('height','44px');
-		if (message != '') {
-			$.post("chat.php?action=sendchat", {to: chatboxtitle, message: message} , function(data){
-				message = message.replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;");
-				$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+username+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+message+'</span></div>');
-				$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
-			});
-		}
 
-		return false;
-	}
+	    message = message.replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;");
+	    $("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">' + 'Me: &nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+message+'</span></div>');
+	    $("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
+    }
 
-	var adjustedHeight = chatboxtextarea.clientHeight;
-	var maxHeight = 94;
-
-	if (maxHeight > adjustedHeight) {
-		adjustedHeight = Math.max(chatboxtextarea.scrollHeight, adjustedHeight);
-		if (maxHeight)
-			adjustedHeight = Math.min(maxHeight, adjustedHeight);
-		if (adjustedHeight > chatboxtextarea.clientHeight)
-			$(chatboxtextarea).css('height',adjustedHeight+8 +'px');
-	}
+    var adjustedHeight = chatboxtextarea.clientHeight;
+    var maxHeight = 94;
+    
+    if (maxHeight > adjustedHeight) {
+    	adjustedHeight = Math.max(chatboxtextarea.scrollHeight, adjustedHeight);
+    	if (maxHeight)
+    		adjustedHeight = Math.min(maxHeight, adjustedHeight);
+    	if (adjustedHeight > chatboxtextarea.clientHeight)
+    		$(chatboxtextarea).css('height',adjustedHeight+8 +'px');
+    }
     else {
-		$(chatboxtextarea).css('overflow','auto');
-	}
+    	$(chatboxtextarea).css('overflow','auto');
+    }
 }
