@@ -12,9 +12,7 @@
                 "action.js"
             ],
      "css": [ 
-                "css/chat.css",
-                "css/screen.css",
-                "css/screen_ie.css"
+                "css/chat.css"
             ]
     }
   ],
