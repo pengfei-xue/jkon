@@ -6,12 +6,16 @@
     {
       "matches": ["<all_urls>"],
       "js": [
-                 "jquery/jquery-1.6.3.min.js", 
-                 "jquery/jquery-ui-1.8.16.custom.min.js",
-                 "bottomCorner.js",
-                 "action.js"
+                "jquery/jquery-1.6.3.min.js", 
+                "jquery/jquery-ui-1.8.16.custom.min.js",
+                "chat.js",
+                "action.js"
             ],
-     "css": [ "bottomCorner.css" ]
+     "css": [ 
+                "css/chat.css",
+                "css/screen.css",
+                "css/screen_ie.css"
+            ]
     }
   ],
   "browser_action": {
