@@ -6,12 +6,8 @@
     {
       "matches": ["<all_urls>"],
       "js": [
-                "jquery/jquery-1.6.3.min.js", 
-                "chat.js",
+                "jquery/jquery-1.7.min.js", 
                 "action.js"
-            ],
-     "css": [ 
-                "css/chat.css"
             ]
     }
   ],
