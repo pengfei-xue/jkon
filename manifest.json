@@ -1,5 +1,6 @@
 {
   "name": "Want JK as page down/up",
+  "manifest_version": 2,
   "version": "0.1",
   "description": "Creates a keyboard shortcut (J & K) to page down/up",
   "content_scripts": [
